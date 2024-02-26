@@ -19,7 +19,7 @@ void setup() {
     while(true);
   }
   
-  myDFPlayer.volume(20);  // Set volume level
+  myDFPlayer.volume(60);  // Set volume level
 }
 
 void loop() {
