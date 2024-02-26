@@ -1,25 +1,24 @@
 #include "Arduino.h"
-#include "SoftwareSerial.h"
+#include"HardwareSerial.h"
 #include "DFRobotDFPlayerMini.h"
 
-SoftwareSerial mySoftwareSerial(10, 11); // RX, TX
-DFRobotDFPlayerMini myDFPlayer;
-
+DFRobotDFPlayerMini DFPlayer;
+HardwareSerial &DFmini = Serial3;
 void setup() {
-  mySoftwareSerial.begin(9600);
+  DFmini.begin(9600);
   Serial.begin(115200);
   
   Serial.println();
   Serial.println("DFRobot DFPlayer Mini Demo");
   
-  if (!myDFPlayer.begin(mySoftwareSerial)) {  
+  if (!DFPlayer.begin(DFmini)) {  
     Serial.println(F("Unable to begin:"));
     Serial.println(F("1.Please recheck the connection!"));
     Serial.println(F("2.Please insert the SD card!"));
     while(true);
   }
   
-  myDFPlayer.volume(60);  // Set volume level
+  DFPlayer.volume(60);  // Set volume level
 }
 
 void loop() {
@@ -28,7 +27,7 @@ void loop() {
     
     // Check if a valid number was received
     if (songNumber > 0) {
-      myDFPlayer.play(songNumber); // Play the song corresponding to the received number
+      DFPlayer.play(songNumber); // Play the song corresponding to the received number
       Serial.print("Playing song ");
       Serial.println(songNumber);
     } else {
